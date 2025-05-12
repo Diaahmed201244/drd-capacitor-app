@@ -1,0 +1,29 @@
+# Ignore node modules
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Ignore build output
+dist
+www
+.vite
+.angular
+.out
+.build
+
+# Ignore experimental or temporary files
+shopflow-online-store-main/
+experimental/
+*.ps1
+project-structure.txt
+
+# Git + editor
+.git
+.gitignore
+.vscode
+.idea
+
+# OS files
+.DS_Store
+Thumbs.db 

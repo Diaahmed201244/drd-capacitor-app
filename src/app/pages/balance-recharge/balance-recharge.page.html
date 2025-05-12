@@ -1,0 +1,115 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Balance Recharge</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Balance Display -->
+  <div class="balance-display">
+    <ion-icon name="wallet-outline"></ion-icon>
+    <span>Current Balance: {{ balance | currency }}</span>
+  </div>
+
+  <!-- Recharge Options -->
+  <div class="section-box">
+    <h3>Quick Recharge</h3>
+    <div class="recharge-options">
+      <ion-button *ngFor="let amount of quickAmounts" 
+                  (click)="handleRecharge(amount)"
+                  class="recharge-option">
+        {{ amount | currency }}
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Custom Amount -->
+  <div class="section-box">
+    <h3>Custom Amount</h3>
+    <ion-item>
+      <ion-label position="stacked">Enter Amount</ion-label>
+      <ion-input type="number" 
+                 [(ngModel)]="customAmount"
+                 placeholder="Enter amount"
+                 min="1">
+      </ion-input>
+    </ion-item>
+    <ion-button expand="block" 
+                (click)="handleRecharge(customAmount)"
+                [disabled]="!customAmount || customAmount < 1">
+      Recharge
+    </ion-button>
+  </div>
+
+  <!-- Transaction History -->
+  <div class="section-box">
+    <h3>Transaction History</h3>
+    <div class="table-container">
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let transaction of transactions" 
+              [class.transaction-new]="transaction.isNew"
+              [class.flash]="transaction.isNew">
+            <td>{{ transaction.date | date:'medium' }}</td>
+            <td>{{ transaction.amount | currency }}</td>
+            <td>
+              <ion-badge [color]="transaction.status === 'success' ? 'success' : 'danger'">
+                {{ transaction.status }}
+              </ion-badge>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ion-content>
+
+<!-- Success Modal -->
+<ion-modal [isOpen]="showSuccessModal" (didDismiss)="showSuccessModal = false">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Recharge Successful</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="showSuccessModal = false">Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <div class="success-content">
+        <ion-icon name="checkmark-circle" color="success" size="large"></ion-icon>
+        <h2>Recharge Successful!</h2>
+        <p>Your balance has been updated.</p>
+        <p>New Balance: {{ balance | currency }}</p>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!-- Error Modal -->
+<ion-modal [isOpen]="showErrorModal" (didDismiss)="showErrorModal = false">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Recharge Failed</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="showErrorModal = false">Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <div class="error-content">
+        <ion-icon name="alert-circle" color="danger" size="large"></ion-icon>
+        <h2>Recharge Failed</h2>
+        <p>{{ errorMessage }}</p>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal> 

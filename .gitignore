@@ -1,4 +1,56 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+/www
+
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.vscode/*
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Capacitor
+/android
+/ios
 
 # dependencies
 /node_modules
@@ -140,3 +192,21 @@ dist
 # dataconnect generated files
 .dataconnect
 node_modules
+
+# === Custom Additions for Pebalaash Jungle Project ===
+
+# Supabase or Capacitor specific output
+.supabase
+.vite/
+
+# Experimental folders (React or test work)
+shopflow-online-store-main/
+experimental/
+*.jsx
+*.tsx
+
+# Project planning or system artifacts
+project-structure.txt
+install.ps1
+*.bak
+*.old
